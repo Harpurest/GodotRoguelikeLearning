@@ -1,0 +1,183 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Reference",
+"class": "Action",
+"language": "GDScript",
+"path": "res://Entities/Actors/Actions/Action.gd"
+}, {
+"base": "Action",
+"class": "ActionWithDirection",
+"language": "GDScript",
+"path": "res://Entities/Actors/Actions/ActionWithDirection.gd"
+}, {
+"base": "Component",
+"class": "BaseAIComponent",
+"language": "GDScript",
+"path": "res://Entities/Actors/Components/BaseAIComponent.gd"
+}, {
+"base": "ActionWithDirection",
+"class": "BumpAction",
+"language": "GDScript",
+"path": "res://Entities/Actors/Actions/BumpAction.gd"
+}, {
+"base": "Node",
+"class": "Component",
+"language": "GDScript",
+"path": "res://Entities/Actors/Components/Component.gd"
+}, {
+"base": "Node",
+"class": "DungeonGenerator",
+"language": "GDScript",
+"path": "res://Map/DungeonGenerator.gd"
+}, {
+"base": "Sprite",
+"class": "Entity",
+"language": "GDScript",
+"path": "res://Entities/Entity.gd"
+}, {
+"base": "Resource",
+"class": "EntityDefinition",
+"language": "GDScript",
+"path": "res://Entities/EntityDefinition.gd"
+}, {
+"base": "Action",
+"class": "EscapeAction",
+"language": "GDScript",
+"path": "res://Entities/Actors/Actions/EscapeAction.gd"
+}, {
+"base": "Node",
+"class": "FieldOfView",
+"language": "GDScript",
+"path": "res://Map/FieldOfView.gd"
+}, {
+"base": "Component",
+"class": "FighterComponent",
+"language": "GDScript",
+"path": "res://Entities/Actors/Components/FighterComponent.gd"
+}, {
+"base": "Resource",
+"class": "FighterComponentDefinition",
+"language": "GDScript",
+"path": "res://Assets/Definitions/Entities/Actors/Components/ComponentDefinitions/FighterComponentDefinition.gd"
+}, {
+"base": "Node2D",
+"class": "Game",
+"language": "GDScript",
+"path": "res://Game/Game.gd"
+}, {
+"base": "Reference",
+"class": "Grid",
+"language": "GDScript",
+"path": "res://Utils/Grid.gd"
+}, {
+"base": "BaseAIComponent",
+"class": "HostileEnemyAIComponent",
+"language": "GDScript",
+"path": "res://Entities/Actors/Components/HostileEnemyAIComponent.gd"
+}, {
+"base": "Node",
+"class": "InputHandler",
+"language": "GDScript",
+"path": "res://Game/InputHandler.gd"
+}, {
+"base": "Node2D",
+"class": "Map",
+"language": "GDScript",
+"path": "res://Map/Map.gd"
+}, {
+"base": "Reference",
+"class": "MapData",
+"language": "GDScript",
+"path": "res://Map/MapData.gd"
+}, {
+"base": "ActionWithDirection",
+"class": "MeleeAction",
+"language": "GDScript",
+"path": "res://Entities/Actors/Actions/MeleeAction.gd"
+}, {
+"base": "ActionWithDirection",
+"class": "MovementAction",
+"language": "GDScript",
+"path": "res://Entities/Actors/Actions/MovementAction.gd"
+}, {
+"base": "Sprite",
+"class": "Tile",
+"language": "GDScript",
+"path": "res://Map/Tile.gd"
+}, {
+"base": "Resource",
+"class": "TileDefinition",
+"language": "GDScript",
+"path": "res://Map/TileDefinition.gd"
+}, {
+"base": "Action",
+"class": "WaitAction",
+"language": "GDScript",
+"path": "res://Entities/Actors/Actions/WaitAction.gd"
+} ]
+_global_script_class_icons={
+"Action": "",
+"ActionWithDirection": "",
+"BaseAIComponent": "",
+"BumpAction": "",
+"Component": "",
+"DungeonGenerator": "",
+"Entity": "",
+"EntityDefinition": "",
+"EscapeAction": "",
+"FieldOfView": "",
+"FighterComponent": "",
+"FighterComponentDefinition": "",
+"Game": "",
+"Grid": "",
+"HostileEnemyAIComponent": "",
+"InputHandler": "",
+"Map": "",
+"MapData": "",
+"MeleeAction": "",
+"MovementAction": "",
+"Tile": "",
+"TileDefinition": "",
+"WaitAction": ""
+}
+
+[application]
+
+config/name="Roguelike Godot Learning"
+run/main_scene="res://Game/Game.tscn"
+run/low_processor_mode=true
+config/icon="res://icon.png"
+
+[debug]
+
+settings/fps/force_fps=60
+
+[display]
+
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
+window/stretch/shrink=0.8
+
+[gui]
+
+common/drop_mouse_on_gui_input_disabled=true
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+vram_compression/import_etc=true
+vram_compression/import_etc2=false
+environment/default_environment="res://default_env.tres"
