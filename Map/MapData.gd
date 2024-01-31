@@ -20,6 +20,8 @@ func _init(map_width: int, map_height: int) -> void:
 	height = map_height
 	entities = []
 	_setup_tiles()
+	Grid.map_width = map_width
+	Grid.map_height = map_height
 	
 func _setup_tiles() -> void:
 	tiles = []

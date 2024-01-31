@@ -2,6 +2,8 @@ class_name Entity
 extends Sprite
 
 signal action_request(actor, action_type, dir)
+signal ai_action_request(actor, action_type, dir)
+signal move(old_position, new_position)
 
 var grid_position: Vector2
 var _definition: EntityDefinition
@@ -33,9 +35,30 @@ func set_entity_type(entity_definition: EntityDefinition) -> void:
 	_definition = entity_definition
 	texture = entity_definition.texture
 	modulate = entity_definition.color
+	
+	match entity_definition.ai_type:
+		AIType.HOSTILE:
+			ai_component = HostileEnemyAIComponent.new()
+			add_child(ai_component)
+			ai_component.connect("react_action", self, "_on_react_action")
+	
+	if entity_definition.fighter_definition:
+		fighter_component = FighterComponent.new(entity_definition.fighter_definition)
+		add_child(fighter_component)
 
 func is_blocking_movement() -> bool:
 	return _definition.is_blocking_movement
 
 func get_entity_name() -> String:
 	return _definition.name
+
+func is_alive() -> bool:
+	if _definition.name != "Player":
+		return ai_component != null
+	return true
+
+func ai_perform(target_entity: Entity, pathfinder: AStar2D) -> void:
+	pass
+
+func _on_react_action(type, offset) -> void:
+	pass

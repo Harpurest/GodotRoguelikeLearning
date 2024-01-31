@@ -74,11 +74,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Game.gd"
 }, {
-"base": "Reference",
-"class": "Grid",
-"language": "GDScript",
-"path": "res://Utils/Grid.gd"
-}, {
 "base": "BaseAIComponent",
 "class": "HostileEnemyAIComponent",
 "language": "GDScript",
@@ -138,7 +133,6 @@ _global_script_class_icons={
 "FighterComponent": "",
 "FighterComponentDefinition": "",
 "Game": "",
-"Grid": "",
 "HostileEnemyAIComponent": "",
 "InputHandler": "",
 "Map": "",
@@ -156,6 +150,10 @@ config/name="Roguelike Godot Learning"
 run/main_scene="res://Game/Game.tscn"
 run/low_processor_mode=true
 config/icon="res://icon.png"
+
+[autoload]
+
+Grid="*res://Utils/Grid.gd"
 
 [debug]
 

@@ -20,6 +20,8 @@ func _ready() -> void:
 	map.generate(player)
 	player.connect("action_request", self, "_on_action_request");
 	map.update_fov(player.grid_position)
+	for entity in map_data.entities:
+		(entity as Entity).connect("ai_action_request", self, "_on_ai_action_request");
 
 func _physics_process(delta: float) -> void:
 	var action: Action = input_handler.get_action(player)
@@ -27,7 +29,6 @@ func _physics_process(delta: float) -> void:
 		print_debug("Start Action")
 		action.perform();
 		print_debug("Finish Action")
-		#_try_action(action, player)
 		_handle_enemy_turns()
 
 func get_map_data():
@@ -35,9 +36,9 @@ func get_map_data():
 
 func _handle_enemy_turns() -> void:
 	for entity in get_map_data().entities:
-		if entity == player:
-			continue
-		print("The %s wonders when it will get to take a real turn." % entity.get_entity_name())
+		if get_map_data().get_tile(entity.grid_position).is_in_view:
+			if entity.is_alive() and entity != player:
+				entity.ai_component.perform()
 
 func _on_action_request(actor: Entity, type: String, dir: Vector2) -> void:
 	print_debug("Perform Action")
@@ -54,3 +55,6 @@ func _on_action_request(actor: Entity, type: String, dir: Vector2) -> void:
 				return
 			MovementAction.new(actor, dir.x, dir.y).perform()
 			map.update_fov(player.grid_position)
+
+func _on_ai_action_request(actor: Entity, type: String, dir: Vector2) -> void:
+	pass

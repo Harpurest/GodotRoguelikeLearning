@@ -6,9 +6,9 @@
 
 [sub_resource type="Resource" id=2]
 script = ExtResource( 3 )
-max_hp = 0
-power = 0
-defense = 0
+max_hp = 30
+power = 5
+defense = 2
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4

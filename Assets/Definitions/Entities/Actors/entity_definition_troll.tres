@@ -6,9 +6,9 @@
 
 [sub_resource type="Resource" id=2]
 script = ExtResource( 3 )
-max_hp = 0
-power = 0
-defense = 0
+max_hp = 16
+power = 4
+defense = 1
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -22,4 +22,4 @@ texture = SubResource( 1 )
 color = Color( 0, 0.498039, 0, 1 )
 is_blocking_movement = true
 fighter_definition = SubResource( 2 )
-ai_type = 0
+ai_type = 1
