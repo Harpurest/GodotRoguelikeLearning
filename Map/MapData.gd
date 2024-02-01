@@ -75,7 +75,7 @@ func get_obstacles() -> Array:
 			var grid_position := Vector2(x, y)
 			var tile: Tile = get_tile(grid_position)
 			if not tile.is_walkable():
-				obstacles.push_back(calculate_point_index(grid_position))
+				obstacles.push_back(grid_position)
 	return obstacles
 
 func astar_add_walkable_cells(obstacles = []):
