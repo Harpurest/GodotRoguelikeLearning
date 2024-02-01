@@ -20,15 +20,13 @@ func _ready() -> void:
 	map.generate(player)
 	player.connect("action_request", self, "_on_action_request");
 	map.update_fov(player.grid_position)
-	for entity in map_data.entities:
+	for entity in get_map_data().entities:
 		(entity as Entity).connect("ai_action_request", self, "_on_ai_action_request");
 
 func _physics_process(delta: float) -> void:
 	var action: Action = input_handler.get_action(player)
 	if action:
-		print_debug("Start Action")
 		action.perform();
-		print_debug("Finish Action")
 		_handle_enemy_turns()
 
 func get_map_data():
@@ -36,12 +34,12 @@ func get_map_data():
 
 func _handle_enemy_turns() -> void:
 	for entity in get_map_data().entities:
-		if get_map_data().get_tile(entity.grid_position).is_in_view:
-			if entity.is_alive() and entity != player:
-				entity.ai_component.perform()
+		var cast_entity = (entity as Entity)
+		if get_map_data().get_tile(cast_entity.grid_position).is_in_view:
+			if cast_entity.is_alive() and cast_entity != player:
+				cast_entity.ai_perform(player, get_map_data().pathfinder)
 
 func _on_action_request(actor: Entity, type: String, dir: Vector2) -> void:
-	print_debug("Perform Action")
 	if type == "Bump":
 		var destination = actor.grid_position + dir
 		var target = get_map_data().get_blocking_entity_at_location(destination)
@@ -57,4 +55,14 @@ func _on_action_request(actor: Entity, type: String, dir: Vector2) -> void:
 			map.update_fov(player.grid_position)
 
 func _on_ai_action_request(actor: Entity, type: String, dir: Vector2) -> void:
-	pass
+	if type == "Bump":
+		var destination = actor.grid_position + dir
+		var target = get_map_data().get_blocking_entity_at_location(destination)
+		if target:
+			WaitAction.new(actor).perform()
+		else:
+			var destination_tile: Tile = get_map_data().get_tile(actor.grid_position + dir)
+			if not destination_tile or not destination_tile.is_walkable():
+				return
+			MovementAction.new(actor, dir.x, dir.y).perform()
+			map.update_fov(player.grid_position)

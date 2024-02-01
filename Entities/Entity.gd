@@ -30,6 +30,8 @@ func move(dir: Vector2) -> void:
 	set_grid_position(self.grid_position + dir)
 	var new_position = self.grid_position;
 	emit_signal("move", old_position, new_position)
+	if ai_component:
+		ai_component.move_updated()
 
 func set_entity_type(entity_definition: EntityDefinition) -> void:
 	_definition = entity_definition
@@ -58,7 +60,14 @@ func is_alive() -> bool:
 	return true
 
 func ai_perform(target_entity: Entity, pathfinder: AStar2D) -> void:
-	pass
+	ai_component.get_awareness(self.grid_position, target_entity.grid_position, pathfinder)
+	ai_component.perform()
 
 func _on_react_action(type, offset) -> void:
-	pass
+	match type:
+		"Melee":
+			print_debug("Melee")
+		"Bump":
+			emit_signal("ai_action_request", self, "Bump", offset)
+		"Wait":
+			print_debug("Wait")
